@@ -107,5 +107,13 @@ module.exports = {
         icon: `src/images/icon.png`,
       },
     },
+    {
+      resolve: "gatsby-plugin-matomo",
+      options: {
+        siteId: "1",
+        matomoUrl: "https://matomo.leishi.io",
+        siteUrl: "https://leishi.io",
+      },
+    },
   ],
 }
