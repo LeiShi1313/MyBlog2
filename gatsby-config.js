@@ -11,6 +11,7 @@ module.exports = {
       email: "me@leishi.io",
       github: "https://github.com/leishi1313/",
       linkedin: "https://linkedin.com/in/lei-shi-swe/",
+      telegram: "https://t.me/caomeixigua/",
     },
     locale: "en",
     title: `Lei Shi`,

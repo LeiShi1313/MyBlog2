@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
-import { FaGithub, FaLinkedin } from "react-icons/fa"
+import { FaGithub, FaLinkedin, FaTelegramPlane } from "react-icons/fa"
 import { IoMdMail } from "react-icons/io"
 
 const Footer = () => {
@@ -16,6 +16,7 @@ const Footer = () => {
             github
             linkedin
             email
+            telegram
           }
           title
         }
@@ -28,6 +29,7 @@ const Footer = () => {
       <ul className="flex justify-center md:order-2">
         <FooterLink href={links.github} icon={FaGithub} label="Github" />
         <FooterLink href={links.linkedin} icon={FaLinkedin} label="Linkedin" />
+        <FooterLink href={links.telegram} icon={FaTelegramPlane} label="Telegram" />
         <FooterLink href={`mailto:${links.email}`} icon={IoMdMail} label="Email" />
       </ul>
       <div className="mt-8 md:mt-0 md:order-1">
