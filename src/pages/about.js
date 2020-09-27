@@ -106,6 +106,7 @@ export const query = graphql`
           links {
             github
             linkedin
+            telegram
             email
           }
           title
