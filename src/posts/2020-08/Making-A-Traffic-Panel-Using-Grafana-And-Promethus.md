@@ -194,8 +194,8 @@ global:
 - job_name: v2ray
   metrics_path: /scrape
   static_configs:
-  - targets: ['**被监控的服务器IP地址**:9550']
-  - targets: ['**被监控的另一台服务器IP地址**:9550']
+  - targets: ['**被监控的服务器IP地址**:9100']
+  - targets: ['**被监控的另一台服务器IP地址**:9100']
 ``` 
 
 然后`docker-compose up -d`就可以了，打开浏览器看看**Grafana服务器IP**:3000有没有起来，然后用`admin`/`admin`登录就可以了。
