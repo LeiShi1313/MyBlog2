@@ -192,7 +192,7 @@ global:
   scrape_interval: 10s
 
 - job_name: v2ray
-  metrics_path: /scrape
+  metrics_path: /metrics
   static_configs:
   - targets: ['**被监控的服务器IP地址**:9100']
   - targets: ['**被监控的另一台服务器IP地址**:9100']
