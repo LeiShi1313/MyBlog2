@@ -21,5 +21,6 @@ module.exports = {
   variants: {
     opacity: ["responsive", "hover", "focus", "group-hover"],
     display: ["responsive", "hover", "focus", "last"],
+    borderWidth: ({ after }) => after(['last']),
   },
 }

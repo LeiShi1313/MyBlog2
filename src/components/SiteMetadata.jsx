@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Helmet } from "react-helmet"
 import { graphql, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
+import { LocaleContext } from "../layouts/Layout"
 
 const SiteMetadata = ({ title, description, image }) => {
   const {

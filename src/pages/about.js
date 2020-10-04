@@ -5,7 +5,7 @@ import Layout from "../layouts/Layout"
 import SiteMetadata from "../components/SiteMetadata"
 
 const AboutPage = ({ data }) => (
-  <Layout>
+  <>
     <SiteMetadata title="About" description="Sample description" />
 
     <div className="container py-12 lg:pb-16">
@@ -80,7 +80,7 @@ const AboutPage = ({ data }) => (
         </div>
       </div>
     </div>
-  </Layout>
+  </>
 )
 
 export default AboutPage

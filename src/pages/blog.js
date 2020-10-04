@@ -6,7 +6,7 @@ import SiteMetadata from "../components/SiteMetadata"
 
 const IndexPage = ({ data }) => {
   return (
-    <Layout>
+    <>
       <SiteMetadata title="Blog" description="Blog of Lei Shi" />
 
         {data.allMdx.edges && data.allMdx.edges.length > 0 ? (
@@ -14,7 +14,7 @@ const IndexPage = ({ data }) => {
         ) : (
           <div className="container">No articles found.</div>
         )}
-    </Layout>
+    </>
   )
 }
 

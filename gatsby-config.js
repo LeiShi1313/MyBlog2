@@ -1,10 +1,10 @@
-// require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
     menu: [
       { name: "Home", to: "/" },
       { name: "Blog", to: "/blog" },
+      { name: "Travel", to: "/travel" },
       { name: "About", to: "/about" },
     ],
     links: {
@@ -19,6 +19,12 @@ module.exports = {
     author: `@leishi1313`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`${__dirname}/src/layouts/Layout.jsx`),
+      },
+    },
     `gatsby-plugin-postcss`,
     `gatsby-plugin-react-helmet`,
     {
