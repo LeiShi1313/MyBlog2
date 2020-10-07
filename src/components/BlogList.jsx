@@ -14,7 +14,7 @@ const BlogList = ({ items, hideLastItemOnMobile = false }) => {
                 <h3 className="text-2xl font-black mt-16 mb-2">
                   <Link
                     className="text-blue-600 shadow-none"
-                    to={`blog/posts/${item.node.fields.slug}`}
+                    to={item.node.fields.path}
                   >
                     {item.node.frontmatter.title}
                   </Link>

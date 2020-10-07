@@ -3,7 +3,6 @@ import { graphql, Link, useStaticQuery } from "gatsby"
 
 import { LocaleContext } from "../layouts/Layout"
 import locales from "../../config/i18n"
-import IconLink from "./IconLink"
 
 const Header = ({ location }) => {
   const { locale } = React.useContext(LocaleContext)

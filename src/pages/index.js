@@ -2,7 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import { useTranslation } from "react-i18next";
 import Img from "gatsby-image"
-import Layout from "../layouts/Layout"
 import SiteMetadata from "../components/SiteMetadata"
 
 const IndexPage = ({ data }) => {

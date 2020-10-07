@@ -11,12 +11,16 @@ const {
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `Mdx`) {
-    const slug = createFilePath({ node, getNode, basePath: `pages` })
-    createNodeField({
-      node,
-      name: `slug`,
-      value: slug,
-    })
+    const name = path.basename(node.fileAbsolutePath, `.md`)
+    const isDefault = name === 'index';
+    const defaultKey = findKey(locales, o => o.default === true)
+    const lang = isDefault ? defaultKey : name.split(`.`)[1]
+    const slug = path.dirname(
+      createFilePath({ node, getNode, basePath: `posts`, trailingSlash: false }))
+
+    createNodeField({node, name: `slug`, value: slug})
+    createNodeField({node, name: `locale`, value: lang})
+    createNodeField({node, name: `isDefault`, value: isDefault})
   }
 }
 
@@ -53,20 +57,34 @@ exports.createPages = async ({ graphql, page, actions }) => {
             id
             fields {
               slug
+              locale
+              isDefault
+            }
+            frontmatter {
+              title
             }
           }
         }
       }
     }
   `)
+  if (result.errors) {
+    console.error(result.errors)
+    return
+  }
+
   result.data.allMdx.edges.forEach(({ node }) => {
+    const isDefault = node.fields.isDefault
+    const locale = node.fields.locale
+    const slug = `/blog/posts${node.fields.slug}`
+    const path = localizedSlug({ isDefault, locale, slug })
     createPage({
-      path: `/blog/posts${node.fields.slug}`,
+      path,
       component: path.resolve(`./src/templates/post.jsx`),
       context: {
-        // Data passed to context is available
-        // in page queries as GraphQL variables.
-        slug: node.fields.slug,
+        slug,
+        path,
+        locale
       },
     })
   })
