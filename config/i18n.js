@@ -20,14 +20,4 @@ module.exports = {
     defaultTitle: `中文标题`,
     defaultDescription: `中文描述`,
   },
-  de: {
-    path: `de`,
-    locale: `de-CN`,
-    dateFormat: `YYYY/MM/DD`,
-    siteLanguage: `zh`,
-    ogLanguage: `zh_CN`,
-    represent: `DE`,
-    defaultTitle: `中文标题`,
-    defaultDescription: `中文描述`,
-  }
 }

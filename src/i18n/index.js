@@ -9,7 +9,7 @@ i18n
     debug: process.env.NODE_ENV === "development",
     resources: translations,
     fallbackLng: "en",
-    keySeparator: false,
+    // keySeparator: false,
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

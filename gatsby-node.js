@@ -11,16 +11,25 @@ const {
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === `Mdx`) {
-    const name = path.basename(node.fileAbsolutePath, `.md`)
-    const isDefault = name === 'index';
-    const defaultKey = findKey(locales, o => o.default === true)
-    const lang = isDefault ? defaultKey : name.split(`.`)[1]
-    const slug = path.dirname(
-      createFilePath({ node, getNode, basePath: `posts`, trailingSlash: false }))
+    const nameArray = node.fileAbsolutePath.split(`.`)
+    const name = path.basename(
+      node.fileAbsolutePath,
+      `.${nameArray[nameArray.length - 1]}`
+    )
 
-    createNodeField({node, name: `slug`, value: slug})
-    createNodeField({node, name: `locale`, value: lang})
-    createNodeField({node, name: `isDefault`, value: isDefault})
+    const defaultKey = findKey(locales, o => o.default === true)
+    const isDefault =
+      name === "index" || nameArray[nameArray.length - 2] === defaultKey
+    const locale = isDefault ? defaultKey : nameArray[nameArray.length - 2]
+    console.log(node.fileAbsolutePath, createFilePath({ node, getNode, basePath: `posts`, trailingSlash: false }), name, isDefault, locale)
+
+    const slug = name === "index"
+      ? `/blog/posts${createFilePath({node, getNode, basePath: `posts`, trailingSlash: false })}`
+      : `/blog/posts${path.dirname(createFilePath({node, getNode, basePath: `posts`, trailingSlash: false }))}`
+
+    createNodeField({ node, name: `slug`, value: slug })
+    createNodeField({ node, name: `locale`, value: locale })
+    createNodeField({ node, name: `isDefault`, value: isDefault })
   }
 }
 
@@ -41,7 +50,7 @@ exports.onCreatePage = ({ page, actions }) => {
         ...page.context,
         locale: lang,
         dateFormat: locales[lang].dateFormat,
-      }
+      },
     })
   })
 }
@@ -62,6 +71,7 @@ exports.createPages = async ({ graphql, page, actions }) => {
             }
             frontmatter {
               title
+              locale
             }
           }
         }
@@ -73,19 +83,57 @@ exports.createPages = async ({ graphql, page, actions }) => {
     return
   }
 
+  var postsBySlug = {}
+  const defaultKey = findKey(locales, o => o.default === true)
+  // Group posts by their slug
   result.data.allMdx.edges.forEach(({ node }) => {
-    const isDefault = node.fields.isDefault
-    const locale = node.fields.locale
-    const slug = `/blog/posts${node.fields.slug}`
-    const path = localizedSlug({ isDefault, locale, slug })
-    createPage({
-      path,
-      component: path.resolve(`./src/templates/post.jsx`),
-      context: {
-        slug,
-        path,
-        locale
-      },
+    if (node.fields.slug in postsBySlug) {
+      postsBySlug[node.fields.slug].push(node)
+    } else {
+      postsBySlug[node.fields.slug] = [node]
+    }
+  })
+  Object.keys(postsBySlug).map(slug => {
+    hasDefault = false
+    postsBySlug[slug].forEach(node => {
+      if (node.frontmatter.locale) {
+        node.frontmatter.locale.forEach(locale => {
+          const isDefault = locale === defaultKey
+          if (isDefault) hasDefault = true
+          createPage({
+            path: localizedSlug({ isDefault, locale, slug }),
+            component: path.resolve(`./src/templates/post.jsx`),
+            context: {
+              slug,
+              locale,
+            },
+          })
+        })
+      } else {
+        const isDefault = node.fields.isDefault
+        if (isDefault) hasDefault = true
+        const locale = node.fields.locale
+        createPage({
+          path: localizedSlug({ isDefault, locale, slug }),
+          component: path.resolve(`./src/templates/post.jsx`),
+          context: {
+            slug,
+            locale,
+          },
+        })
+      }
     })
+    // If this slug doesn't have a default post, create one
+    if (!hasDefault) {
+      const locale = postsBySlug[slug][0].fields.locale
+      createPage({
+        path: localizedSlug({ isDefault: true, locale, slug }),
+        component: path.resolve(`./src/templates/post.jsx`),
+        context: {
+          slug,
+          locale,
+        },
+      })
+    }
   })
 }

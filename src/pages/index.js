@@ -1,7 +1,8 @@
 import React from "react"
+import Img from "gatsby-image"
 import { graphql } from "gatsby"
 import { useTranslation } from "react-i18next";
-import Img from "gatsby-image"
+
 import SiteMetadata from "../components/SiteMetadata"
 
 const IndexPage = ({ data }) => {
@@ -22,10 +23,10 @@ const IndexPage = ({ data }) => {
           </div>
           <div className="text-center lg:w-2/3 w-full mt-4">
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-              Lei Shi {t("test")}
+              Lei Shi
             </h1>
             <p className="mb-8 leading-relaxed">
-              Yet another software enginee
+              {t("home.hero")}
             </p>
           </div>
         </div>

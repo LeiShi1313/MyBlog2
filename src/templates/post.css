@@ -100,3 +100,7 @@
 .markdown .language-text {
   @apply bg-gray-200 !important;
 }
+
+.markdown .gatsby-resp-image-wrapper {
+  @apply mb-1 mt-1
+}

@@ -1,0 +1,42 @@
+---
+title:  i18n Test
+date:   2020-10-10
+locale: [en, zh]
+---
+
+import LocaleText from "../../../components/LocaleText.jsx"
+import CodeBlock from "../../../components/mdx/CodeBlock.jsx"
+import Code from "../../../components/mdx/Code.jsx"
+
+# <LocaleText en='This is heading 1' zh='这是H1'/>
+
+## <LocaleText en='This is heading 2' zh='这是H2'/>
+
+### <LocaleText en='This is heading 3' zh='这是H3'/>
+
+> <LocaleText en='This is quote' zh='这是引用'/>
+>
+> > <LocaleText en='This is also quote' zh='这也是引用'/>
+
+
+- <LocaleText en='This is lists' zh='这是列表'/>
+
+    - <LocaleText en='This is also lists' zh='这也是列表'/>
+
+
+1. <LocaleText en='This is ordered lists' zh='这是有序列表'/>
+2. <LocaleText en='This is also ordered lists' zh='这也是有序列表'/>
+
+<CodeBlock>
+    <LocaleText en="This is code block" zh="这是代码块" />
+</CodeBlock>
+
+<LocaleText en="This is normal text" zh="这是正文" />
+
+**<LocaleText en="bold" zh="加粗" />**
+
+*<LocaleText en="italic" zh="斜体" />*
+
+<Code><LocaleText en="inline code" zh="内嵌代码"/></Code>
+
+[<LocaleText en="link" zh="链接"/>](https://www.leishi.io)

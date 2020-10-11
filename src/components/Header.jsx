@@ -1,11 +1,13 @@
 import React from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
+import { useTranslation } from "react-i18next";
 
 import { LocaleContext } from "../layouts/Layout"
 import locales from "../../config/i18n"
 
 const Header = ({ location }) => {
   const { locale } = React.useContext(LocaleContext)
+  const { t } = useTranslation()
 
   const { site } = useStaticQuery(graphql`
     query {
@@ -30,12 +32,13 @@ const Header = ({ location }) => {
               className="ml-3 mr-3 xl:ml-6 xl:mr-6 text-sm sm:text-base font-medium border-b-2 pb-2 border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-200 transition duration-150 ease-in-out"
               activeClassName="border-blue-600 text-gray-900 hover:border-blue-600"
               partiallyActive={link.to !== "/"}
-              to={`${locales[locale].default ? "" : locale}/${link.to}`}
+              to={`${locales[locale].default ? "" : `/${locale}`}${link.to}`}
             >
-              {link.name}
+              {t(`${link.name}.title`)}
             </Link>
           ))}
-          <a
+          <span
+            key={`header_language_switch`}
             className="ml-3 mr-3 xl:ml-6 xl:mr-6 text-sm sm:text-base font-medium border-b-2 pb-2 border-transparent text-gray-700"
             active={`false`}
           >
@@ -48,7 +51,7 @@ const Header = ({ location }) => {
                     <>
                       {idx > 1 ? "|" : ""}
                       <a
-                        key={`menu_desktop_link_language_${lang}`}
+                        key={`header_language_${lang}`}
                         className="hover:text-gray-800 transition duration-150 ease-in-out"
                         href={
                           locales[lang].default
@@ -64,7 +67,7 @@ const Header = ({ location }) => {
                   );
                 }
               )}
-          </a>
+          </span>
         </nav>
       </div>
     </header>

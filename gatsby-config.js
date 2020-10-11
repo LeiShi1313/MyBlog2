@@ -2,10 +2,10 @@
 module.exports = {
   siteMetadata: {
     menu: [
-      { name: "Home", to: "/" },
-      { name: "Blog", to: "/blog" },
-      { name: "Travel", to: "/travel" },
-      { name: "About", to: "/about" },
+      { name: "home", to: "/" },
+      { name: "blog", to: "/blog" },
+      { name: "travel", to: "/travel" },
+      { name: "about", to: "/about" },
     ],
     links: {
       email: "me@leishi.io",
