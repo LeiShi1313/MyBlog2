@@ -1,31 +1,18 @@
 import React, { useContext } from "react"
 import { Helmet } from "react-helmet"
-import { graphql, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
-import { LocaleContext } from "../layouts/Layout"
+
+import { LocaleContext, locales } from "../i18n"
 
 const SiteMetadata = ({ title, description, image }) => {
-  const {
-    site: {
-      siteMetadata: { locale, siteTitle },
-    },
-  } = useStaticQuery(graphql`
-    query SiteMetadata {
-      site {
-        siteMetadata {
-          locale
-          siteTitle: title
-        }
-      }
-    }
-  `)
-
+  const { locale } = useContext(LocaleContext)
+  
   return (
     <Helmet
       defer={false}
-      defaultTitle={siteTitle}
+      defaultTitle={locales[locale].defaultTitle}
       title={title}
-      titleTemplate={`%s | ${siteTitle}`}
+      titleTemplate={`%s | ${locales[locale].defaultTitle}`}
     >
       <html lang={locale} />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -33,7 +20,7 @@ const SiteMetadata = ({ title, description, image }) => {
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:locale" content={locale} />
-      <meta property="og:site_name" content={siteTitle} />
+      <meta property="og:site_name" content={locales[locale].defaultTitle} />
       <meta property="og:image" content={image} />
       <meta property="og:description" content={description} />
       <meta name="twitter:card" content="summary" />

@@ -3,7 +3,6 @@ import React from "react"
 import { Link } from "gatsby"
 
 const BlogList = ({ items }) => {
-  console.log(items)
   return (
     <div className="container">
       <div className="flex flex-wrap mx-1">

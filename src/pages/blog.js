@@ -1,18 +1,20 @@
-import React from "react"
+import React, { useContext } from "react"
 import { graphql } from "gatsby"
 import { useTranslation } from "react-i18next"
 
+import { LocaleContext } from "../i18n"
 import BlogList from "../components/BlogList"
 import SiteMetadata from "../components/SiteMetadata"
 
 const IndexPage = ({ data }) => {
-  const { i18n } = useTranslation()
+  const { t } = useTranslation()
+  const { locale } = useContext(LocaleContext)
   return (
     <>
-      <SiteMetadata title="Blog" description="Blog of Lei Shi" />
+      <SiteMetadata title={t("blog.title")} description={t("blog.description")} />
 
         {data.allMdx.edges && data.allMdx.edges.length > 0 ? (
-          <BlogList items={data.allMdx.edges.filter(e => e.node.fields.locale === i18n.language)} />
+          <BlogList items={data.allMdx.edges.filter(e => e.node.fields.locale === locale)} />
         ) : (
           <div className="container">No articles found.</div>
         )}

@@ -7,27 +7,12 @@ import SiteMetadata from "../components/SiteMetadata"
 import LocaleText from "../components/LocaleText"
 
 const AboutPage = ({ data }) => {
-  const { i18n } = useTranslation()
+  const { t } = useTranslation()
+
   return (
     <>
-      <SiteMetadata title="About" description="Sample description" />
+      <SiteMetadata title={t("about.title")} description={t("about.description")} />
 
-      {i18n.language === "en" ? (
-        <div className="container py-12 lg:pb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight text-gray-900">
-            Congratulations!
-            <span role="img" aria-label="party popper">
-              🎉
-            </span>
-            <br />
-            <span className="text-blue-600">
-              You just found yet another software engineer's personal website.
-            </span>
-          </h2>
-        </div>
-      ) : (
-        ""
-      )}
       <div className="bg-gray-100">
         <div className="container py-12 lg:pb-16">
           <div className="flex flex-wrap">

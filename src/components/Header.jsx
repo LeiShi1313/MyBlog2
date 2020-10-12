@@ -1,12 +1,13 @@
-import React from "react"
+import React, { useContext } from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import { useTranslation } from "react-i18next";
 
-import { LocaleContext } from "../layouts/Layout"
-import locales from "../../config/i18n"
+import LanguageSwitch from "./LanguageSwitch"
+import { LocaleContext, locales } from "../i18n"
+
 
 const Header = ({ location }) => {
-  const { locale } = React.useContext(LocaleContext)
+  const { locale } = useContext(LocaleContext)
   const { t } = useTranslation()
 
   const { site } = useStaticQuery(graphql`
@@ -21,7 +22,6 @@ const Header = ({ location }) => {
       }
     }
   `)
-  var idx = 0
   return (
     <header className="text-gray-700 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row">
@@ -37,37 +37,7 @@ const Header = ({ location }) => {
               {t(`${link.name}.title`)}
             </Link>
           ))}
-          <span
-            key={`header_language_switch`}
-            className="ml-3 mr-3 xl:ml-6 xl:mr-6 text-sm sm:text-base font-medium border-b-2 pb-2 border-transparent text-gray-700"
-            active={`false`}
-          >
-            {Object.keys(locales)
-              .filter(lang => lang !== locale)
-              .map(
-                lang => {
-                  idx++;
-                  return (
-                    <>
-                      {idx > 1 ? "|" : ""}
-                      <a
-                        key={`header_language_${lang}`}
-                        className="hover:text-gray-800 transition duration-150 ease-in-out"
-                        href={
-                          locales[lang].default
-                            ? location.pathname.replace(`/${locale}`, "")
-                            : locales[locale].default
-                            ? `/${lang}${location.pathname}`
-                            : location.pathname.replace(locale, lang)
-                        }
-                      >
-                        {locales[lang].represent}
-                      </a>
-                    </>
-                  );
-                }
-              )}
-          </span>
+          <LanguageSwitch location={location} locale={locale} />
         </nav>
       </div>
     </header>

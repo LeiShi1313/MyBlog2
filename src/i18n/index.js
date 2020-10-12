@@ -1,12 +1,18 @@
+import React from "react"
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
-import translations from "../../config/translations"
 
-console.log(translations)
+import LocaleContext from "./LocaleContext"
+import locales from "./locales"
+import translations from "./translations"
+
+
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     debug: process.env.NODE_ENV === "development",
+    defaultLanguage: 'en',
+    otherLanguages: ['zh'],
     resources: translations,
     fallbackLng: "en",
     // keySeparator: false,
@@ -15,4 +21,4 @@ i18n
     },
   })
 
-export default i18n
+export { i18n as default, LocaleContext, locales }

@@ -1,15 +1,14 @@
-import React from "react"
-import { useTranslation } from "react-i18next"
+import React, { useContext } from "react"
 
-import locales from "../../config/i18n"
+import { LocaleContext, locales } from "../i18n"
 import { findKey } from "../utils/gatsby-node-helpers"
 
 
 const LocaleText = ({ children, ...props }) => {
-    const { i18n } = useTranslation()
+    const { locale } = useContext(LocaleContext)
 
-    if (i18n.language in props) {
-        return props[i18n.language]
+    if (locale in props) {
+        return props[locale]
     }
     const defaultKey = findKey(locales, l => l.default === true)
     if (defaultKey in props) {

@@ -2,12 +2,11 @@ import React, { useEffect } from "react"
 import { I18nextProvider } from "react-i18next"
 import "typeface-inter"
 
-import i18n from "../i18n"
-import "../styles/style.css"
+import { default as i18n, LocaleContext } from "../i18n"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 
-const LocaleContext = React.createContext()
+import "../styles/style.css"
 
 const Layout = ({ children, location, pageContext: { locale } }) => {
   useEffect(() => {
@@ -27,4 +26,4 @@ const Layout = ({ children, location, pageContext: { locale } }) => {
   )
 }
 
-export { Layout as default, LocaleContext }
+export default Layout

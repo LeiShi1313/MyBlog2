@@ -9,7 +9,7 @@ const IndexPage = ({ data }) => {
   const { t } = useTranslation();
   return (
     <>
-      <SiteMetadata title="Home" description="Portfolio of Lei Shi" />
+      <SiteMetadata title={t("home.title")} description={(t("home.description"))} />
 
       <section className="text-gray-700 body-font">
         <div className="container mx-auto flex px-5 py-12 items-center justify-center flex-col">

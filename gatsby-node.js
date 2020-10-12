@@ -1,7 +1,7 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
-const locales = require(`./config/i18n`)
+const locales = require(`./src/i18n/locales`)
 const {
   localizedSlug,
   findKey,
