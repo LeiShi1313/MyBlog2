@@ -205,7 +205,7 @@ global:
 首先添加一个面板，`+`->`Import`：
 ![](./grafana_import.png)
 
-然后在`Import via panel json`里复制粘贴[这里](https://github.com/LeiShi1313/v2ray-iptables-exporter/blob/master/dashboard.json)的内容，随便起个名字，点击`Import`就可以了
+然后在`Import via grafana.com`里用ID：`13674`，随便起个名字，点击`Import`就可以了
 
 
 ## 进阶玩法
