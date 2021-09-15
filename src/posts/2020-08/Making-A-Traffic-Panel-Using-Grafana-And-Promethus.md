@@ -192,10 +192,10 @@ global:
   scrape_interval: 10s
 
 - job_name: v2ray
-  metrics_path: /scrape
+  metrics_path: /metrics
   static_configs:
-  - targets: ['**被监控的服务器IP地址**:9550']
-  - targets: ['**被监控的另一台服务器IP地址**:9550']
+  - targets: ['**被监控的服务器IP地址**:9100']
+  - targets: ['**被监控的另一台服务器IP地址**:9100']
 ``` 
 
 然后`docker-compose up -d`就可以了，打开浏览器看看**Grafana服务器IP**:3000有没有起来，然后用`admin`/`admin`登录就可以了。
@@ -205,7 +205,7 @@ global:
 首先添加一个面板，`+`->`Import`：
 ![](./grafana_import.png)
 
-然后在`Import via panel json`里复制粘贴[这里](https://github.com/LeiShi1313/v2ray-iptables-exporter/blob/master/dashboard.json)的内容，随便起个名字，点击`Import`就可以了
+然后在`Import via grafana.com`里用ID：`13674`，随便起个名字，点击`Import`就可以了
 
 
 ## 进阶玩法

@@ -24,7 +24,7 @@ const IndexPage = ({ data }) => {
               Lei Shi
             </h1>
             <p class="mb-8 leading-relaxed">
-              Yet another software enginee
+              Yet another software engineer
             </p>
           </div>
         </div>
