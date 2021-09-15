@@ -37,6 +37,7 @@ const SiteMetadata = ({ title, description, image }) => {
       <meta property="og:description" content={description} />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:image" content={image} />
+      <script async defer data-website-id="868d6d2e-0637-4c8e-a39e-e76f5c6e859b" src="https://umami.leishi.io/umami.js"></script>
     </Helmet>
   )
 }
