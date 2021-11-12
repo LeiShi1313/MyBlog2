@@ -132,16 +132,59 @@ tags:              Grafana Promethus Synology qBittorrent Deluge Transmision
 
 ### 我的下载器太多了，获取一次数据要10秒钟以上，怎么办？
 
-在downloader-exporter的高级设置页面里，在`环境`这个页面，把`USE_MULTI_PORTS`设为`true`
+你可以利用[multi-target-exporter](https://prometheus.io/docs/guides/multi-target-exporter/)来实现通过一个端口获取不同的数据，例如：
+```yaml
+global:
+  scrape_interval: 10s
 
-![](./img/14.07.47@2x.jpg)
+scrape_configs:
+- job_name: downloader-exporter
+  static_configs:
+    - targets:
+      - qb1 # 对应配置里你自定义的下载器名称
+      - qb2
+      - de1
+  relabel_configs: # 这整段可以照抄
+    - source_labels: [__address__]
+      target_label: __param_name
+    - source_labels: [__param_name]
+      target_label: instance
+    - target_label: __address__
+      replacement: 192.168.1.27:9000 # downloader-exporter的IP和端口
+```
 
-然后根据你下载的数量，开放同样多的端口，从`9000`开始
+### 某个下载器获取数据太慢了，老是timeout怎么办？
 
-![](./img/14.07.23@2x.jpg)
+你可以创建多个job，每个job采用不同的timeout时间，例如：
+```yaml
+global:
+  scrape_interval: 10s
 
-然后修改`prometheus.yml`，把所有的IP:端口都写进去
-
-![](./img/prometheus2.png)
-
-然后重新创建downloader-exporter，重新启动Prometheus，数据的获取应该不会再慢了
+scrape_configs:
+- job_name: downloader-exporter # 把获取时间比较快的放在这个job里
+  static_configs:
+    - targets:
+      - qb1
+      - qb2
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_name
+    - source_labels: [__param_name]
+      target_label: instance
+    - target_label: __address__
+      replacement: 192.168.1.27:9000
+- job_name: slower-downloader-exporter # 把获取时间比较慢的放在这个job里
+  scrape_interval: 2m # 把获取间隔改到2分钟
+  scrape_timeout: 1m # 把timeout改大到1分钟
+  static_configs:
+    - targets:
+      - tr1
+      - tr2
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_name
+    - source_labels: [__param_name]
+      target_label: instance
+    - target_label: __address__
+      replacement: 192.168.1.27:9000
+```
