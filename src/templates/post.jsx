@@ -10,12 +10,17 @@ const shortcodes = { Link }
 
 export default function BlogPost({ data }) {
   const post = data.mdx
+  console.log(post)
   return (
     <Layout>
       <div className="markdown container mx-auto">
         <div className="flex flex-wrap items-center justify-start mx-1 w-full mt-6">
           <div className="text-center justify-center w-full">
             <h1 className="">{post.frontmatter.title}</h1>
+            {post.frontmatter.subtitle !== null
+              ? <h3 className="italic">{post.frontmatter.subtitle}</h3>
+              : ''
+            }
             <small className="italic">{post.frontmatter.date}</small>
           </div>
           <div className="w-full mt-12">
@@ -37,6 +42,7 @@ export const query = graphql`
       body
       frontmatter {
         title
+        subtitle
         date(formatString: "DD MMMM, YYYY")
       }
     }
