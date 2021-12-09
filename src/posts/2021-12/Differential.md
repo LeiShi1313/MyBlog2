@@ -159,6 +159,9 @@ easy_upload = true
 ; 也可以使用明日大的脚本来进行自动填充
 ; auto_feed = true
 
+; 使用差速器自带的短网址服务
+use_short_url = true
+
 ; 差速器自带一个自建的PTGen，如果无法访问，可以提供自定义PTGen地址
 ;ptgen_url = https://XXXXX.com
 
