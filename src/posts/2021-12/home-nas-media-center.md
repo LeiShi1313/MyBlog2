@@ -45,6 +45,7 @@ tags:              Radarr Sonarr Prowlarr Overserr Ombi Usenet PT Emby Plex NAS
   - [配置Prowlarr](#配置prowlarr)
   - [安装Jackett](#安装jackett)
   - [配置Jackett](#配置jackett)
+  - [（可选）配置flaresolverr](#可选配置flaresolverr)
   - [回顾](#回顾-2)
 - [Radarr/Sonarr](#radarrsonarr)
   - [安装Radarr/Sonarr](#安装radarrsonarr)
@@ -693,6 +694,46 @@ Indexer主要分为2类
 ![](./00.07.10@2x.png)
 
 > **注意**：Jackett不支持Usenet的Indexer，需要到Radarr/Sonarr另行配置
+
+### （可选）配置flaresolverr
+
+因为很多PT站点都开了CF盾，这些Indexer可能不会正常工作，所以我们还需要flaresolverr来解决CF5秒盾的问题
+
+> flaresolverr实质上是跑一个浏览器，会对内存有较大的消耗，非必要不需要配置
+
+```yaml
+---
+version: "3"
+services:
+
+  # ... 此处是其他容器的配置
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    ports:
+      - 8191:8191
+```
+
+配置编写完成后，在命令行运行
+```shell
+# 移动到你的配置文件夹下
+# cd ~ 
+sudo docker-compose down && sudo docker-compose up -d
+```
+
+对于Jackett，flaresolverr的配置很简单，拉到最底下加上`http://flaresolverr:8191/`就行了
+![](./21.18.18@2x.png)
+
+对于Prowlarr，需要现在Settings（设置）-> Indexers，点击`FlareSolver`
+![](./21.20.57@2x.png)
+
+然后取个名字和Tag，填上`http://flaresolverr:8191/`，保存好
+![](./21.20.34@2x.png)
+
+然后在你需要flaresolver的Indexer配置里，加上对应的Tag就行
+![](./21.24.03@2x.png)
 
 ### 回顾
 
