@@ -29,6 +29,8 @@ tags:              Differential 差速器 PT 发种
   - [Windows](#windows)
   - [Mac OS](#mac-os)
   - [Linux](#linux)
+    - [一键脚本安装](#一键脚本安装)
+    - [手动安装](#手动安装)
   - [Docker](#docker)
 - [配置差速器](#配置差速器)
 - [差速器的使用](#差速器的使用)
@@ -95,6 +97,13 @@ dft -v
 
 ### Linux
 
+#### 一键脚本安装
+对于`Debian 9+`/`Ubuntu 20.04+`/`Centos 8`/`Fedora 34+`/`Archlinux`，可以使用一键脚本安装
+```shell
+curl -Lso- https://raw.githubusercontent.com/LeiShi1313/Differential/main/install.sh | bash
+```
+
+#### 手动安装
 大部分的发行版安装流程大同小异，本文将以Debian/Ubuntu作为例子，安装将全程在命令行界面完成
 1. 安装`python3`、`python3-pip`、`ffmpeg`以及`mediainfo`：
 ```shell
