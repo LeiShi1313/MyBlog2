@@ -948,7 +948,7 @@ services:
     environment:
       - PUID=1026 # 注意替换
       - PGID=100  # 注意替换
-      - TZ=Asis/Shanghai
+      - TZ=Asia/Shanghai
     ports:
       - 5055:5055
     volumes:
@@ -1005,7 +1005,7 @@ services:
     environment:
       - PUID=1026 # 注意替换
       - PGID=100  # 注意替换
-      - TZ=Asis/Shanghai
+      - TZ=Asia/Shanghai
     volumes:
       - ./ombi:/config
     ports:
@@ -1062,7 +1062,7 @@ services:
     environment:
       - PUID=1026 # 注意替换
       - PGID=100  # 注意替换
-      - TZ=Asis/Shanghai
+      - TZ=Asia/Shanghai
     volumes:
       - ./chinesesubfinder:/config
       - /volume1/Data/Movies:/volume1/Data/Movies
@@ -1116,7 +1116,7 @@ services:
     environment:
       - PUID=1026 # 注意替换
       - PGID=100  # 注意替换
-      - TZ=Asis/Shanghai
+      - TZ=Asia/Shanghai
     volumes:
       - ./bazarr:/config
       - /volume1/Data/Movies:/volume1/Data/Movies     # 替换成你自己的电影文件夹
