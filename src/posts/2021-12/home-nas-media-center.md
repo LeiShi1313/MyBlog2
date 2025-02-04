@@ -132,7 +132,7 @@ PT相比BT，入门有一定的门槛，高质量的站点要么只通过熟人�
 想要玩转Usenet，你需要3部分来写共同协作来下载资源：
 - `Indexer`，类似于种子搜索网站，提供下载Usenet资源需要的[nzb](https://en.wikipedia.org/wiki/NZB)文件。Indexer有免费的，有收费的，也有类似于PT一样进入门槛很高的，本文不作推荐，新手可以从免费的玩起，熟悉流程后再寻找质量更高的Indexer。你可以从[这个链接](https://www.reddit.com/r/usenet/wiki/indexers)起步寻找适合你的Indexer。
 - `Provider`，负责提供连接Usenet的帐号。Usenet的内容存储是分布式的，但是你需要一个Provider才能连上Usenet网络，Provider大部分收费，月付费$3-$5左右，这是使用Usenet最大的花销。你可以从[这个链接](https://www.reddit.com/r/usenet/wiki/providers)起步寻找适合自己的Provider。
-- nzb下载软件，主要推荐是用[nzbget](https://nzbget.net/)和[sabnzbd](https://sabnzbd.org/)
+- nzb下载软件，主要推荐是用[nzbget](https://nzbget.com)和[sabnzbd](https://sabnzbd.org/)
 
 ### 2. Jackett/Prowlarr 资源索引中心
 
